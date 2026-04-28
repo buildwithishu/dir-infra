@@ -488,7 +488,8 @@
 
     .rewired {
       padding: 12rem 0;
-      background: #fff;
+      background: #202321;
+      color: #f4f4f0;
     }
 
     .steps-title {
@@ -499,17 +500,26 @@
       font-weight: 650;
     }
 
+    .steps-title .muted {
+      color: rgba(244, 244, 240, .48);
+    }
+
     .steps-list {
       counter-reset: step;
       display: grid;
       gap: 0;
+      padding: 1.2rem 3.2rem;
+      border-radius: 1.4rem;
+      background: #f7f7f4;
+      color: #151717;
+      overflow: hidden;
     }
 
     .step {
       counter-increment: step;
       position: relative;
       padding: 3.6rem 0 3.6rem 8rem;
-      border-top: 1px solid rgba(21, 23, 23, .12);
+      border-top: 1px solid rgba(21, 23, 23, .09);
       font-size: clamp(2.4rem, 2.8vw, 4.4rem);
       line-height: 1.08;
       letter-spacing: -.03em;
@@ -517,7 +527,7 @@
     }
 
     .step:last-child {
-      border-bottom: 1px solid rgba(21, 23, 23, .12);
+      border-bottom: 1px solid rgba(21, 23, 23, .09);
     }
 
     .step:before {
@@ -528,6 +538,11 @@
       font-size: 1.6rem;
       letter-spacing: 0;
       color: #b3b3b3;
+    }
+
+    .rewired .cta {
+      background: #f4f4f0;
+      color: #151717;
     }
 
     .agents {
@@ -1077,13 +1092,13 @@
     <section class="rewired reveal">
       <div class="container grid-2">
         <div>
-          <h2 class="steps-title">Real Estate,<br><span class="muted">Rewired.</span></h2>
-          <button class="cta" type="button">Start Your Search <span aria-hidden="true">→</span></button>
+          <h2 class="steps-title">Work Space,<br><span class="muted">Rewired.</span></h2>
+          <button class="cta" type="button">Book a Tour <span aria-hidden="true">→</span></button>
         </div>
         <div class="steps-list">
-          <div class="step">Talk to a Real Human. <span class="muted">We match you with an expert who actually listens.</span></div>
-          <div class="step">Get Clarity. <span class="muted">We define what you really need, not just what’s available.</span></div>
-          <div class="step">Move Forward. <span class="muted">We find what fits — and make it happen.</span></div>
+          <div class="step">No setup cost. <span class="muted">Move in fast without extra onboarding charges.</span></div>
+          <div class="step">PS5 chilling area. <span class="muted">Take a break, reset, and come back sharper.</span></div>
+          <div class="step">Healthy cafeteria. <span class="muted">Fresh food and coffee keep the workday easy.</span></div>
         </div>
       </div>
     </section>
