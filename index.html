@@ -343,6 +343,25 @@
       font-weight: 600;
     }
 
+    [data-parallax-section] {
+      position: relative;
+    }
+
+    [data-parallax] {
+      will-change: transform, opacity;
+    }
+
+    [data-parallax="image"] {
+      transform: translate3d(0, 0, 0) scale(1.06);
+      transform-origin: center;
+    }
+
+    .parallax-ready [data-parallax="copy"],
+    .parallax-ready [data-parallax="card"] {
+      transform: translate3d(0, 2.8rem, 0);
+      opacity: 0;
+    }
+
     .why {
       padding: 12rem 0 7rem;
     }
@@ -366,7 +385,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-      transform: scale(1.04);
     }
 
     .arrows-section {
@@ -431,8 +449,6 @@
       justify-content: space-between;
       padding: 2.4rem 0 0;
       border-top: 1px solid rgba(21, 23, 23, .18);
-      transform: translateY(3rem);
-      opacity: 0;
       transition: transform .9s cubic-bezier(.16, 1, .3, 1), opacity .9s ease;
     }
 
@@ -537,6 +553,7 @@
       grid-template-columns: .72fr 1fr;
       gap: 4rem;
       align-items: center;
+      overflow: hidden;
     }
 
     .agent-media img {
@@ -624,7 +641,6 @@
       height: 100%;
       object-fit: cover;
       z-index: 0;
-      transform: scale(1.04);
       transition: transform .8s cubic-bezier(.16, 1, .3, 1);
     }
 
@@ -679,6 +695,10 @@
       display: block;
     }
 
+    .support-item {
+      overflow: hidden;
+    }
+
     .support-item h3 {
       margin: 2rem 0 1rem;
       font-size: clamp(2rem, 2.2vw, 3.2rem);
@@ -711,6 +731,7 @@
       gap: 4rem;
       padding-top: 3rem;
       border-top: 1px solid rgba(241, 241, 241, .2);
+      overflow: hidden;
     }
 
     .post img {
@@ -755,7 +776,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.08);
       z-index: 0;
     }
 
@@ -988,6 +1008,24 @@
         white-space: normal;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *:before,
+      *:after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+
+      [data-parallax],
+      .metric-row div,
+      .arrow-row img {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
   </style>
 </head>
 <body>
@@ -1060,95 +1098,95 @@
         </div>
       </div>
     </section>
-    <section class="why reveal">
+    <section class="why reveal" data-parallax-section>
       <div class="container">
         <div class="grid-2">
-          <div class="section-label">Why Root Space</div>
-          <p class="large-copy why-copy">A ready office without the office headache. <span class="muted">Walk in with your laptop, choose the way you want to sit, and let the space handle the infrastructure.</span></p>
+          <div class="section-label" data-parallax="copy">Why Root Space</div>
+          <p class="large-copy why-copy" data-parallax="copy">A ready office without the office headache. <span class="muted">Walk in with your laptop, choose the way you want to sit, and let the space handle the infrastructure.</span></p>
         </div>
         <div class="why-video">
-          <img src="drive-assets/root-space/optimized/200-dsc00916.webp" alt="Open desk seating at Root Space">
+          <img data-parallax="image" src="drive-assets/root-space/optimized/200-dsc00916.webp" alt="Open desk seating at Root Space">
         </div>
       </div>
     </section>
 
-    <section class="arrows-section reveal">
+    <section class="arrows-section reveal" data-parallax-section>
       <div class="container">
-        <h2 class="arrows-title">Built for teams that need <span>room to move.</span></h2>
+        <h2 class="arrows-title" data-parallax="copy">Built for teams that need <span>room to move.</span></h2>
         <div class="metric-row">
-          <div><strong>Cabins</strong><span>Private rooms for focused teams</span></div>
-          <div><strong>Desks</strong><span>Flexible seats for founders and freelancers</span></div>
-          <div><strong>Lounge</strong><span>A reset zone for calls, breaks, and downtime</span></div>
-          <div><strong>Pantry</strong><span>Coffee, food, and everyday convenience</span></div>
+          <div data-parallax="card"><strong>Cabins</strong><span>Private rooms for focused teams</span></div>
+          <div data-parallax="card"><strong>Desks</strong><span>Flexible seats for founders and freelancers</span></div>
+          <div data-parallax="card"><strong>Lounge</strong><span>A reset zone for calls, breaks, and downtime</span></div>
+          <div data-parallax="card"><strong>Pantry</strong><span>Coffee, food, and everyday convenience</span></div>
         </div>
-        <p class="center-text">No setup cost, no long fit-out cycle, no furniture hunt. <span class="muted">Join when you need it, scale when the team grows, and leave without the usual hassle.</span></p>
+        <p class="center-text" data-parallax="copy">No setup cost, no long fit-out cycle, no furniture hunt. <span class="muted">Join when you need it, scale when the team grows, and leave without the usual hassle.</span></p>
       </div>
     </section>
 
-    <section class="rewired reveal">
+    <section class="rewired reveal" data-parallax-section>
       <div class="container grid-2">
-        <div>
+        <div data-parallax="copy">
           <h2 class="steps-title">Facilities,<br><span class="muted">Already In.</span></h2>
           <a class="cta" href="#contact">Book a Tour <span aria-hidden="true">→</span></a>
         </div>
         <div class="steps-list">
-          <div class="step">High-speed Wi-Fi. <span class="muted">Stable connectivity for meetings, builds, calls, and daily operations.</span></div>
-          <div class="step">Free coffee and pantry access. <span class="muted">The small daily comforts are handled before the workday starts.</span></div>
-          <div class="step">Chilling lounge and breakout spaces. <span class="muted">A workplace that makes room for momentum and recovery.</span></div>
+          <div class="step" data-parallax="card">High-speed Wi-Fi. <span class="muted">Stable connectivity for meetings, builds, calls, and daily operations.</span></div>
+          <div class="step" data-parallax="card">Free coffee and pantry access. <span class="muted">The small daily comforts are handled before the workday starts.</span></div>
+          <div class="step" data-parallax="card">Chilling lounge and breakout spaces. <span class="muted">A workplace that makes room for momentum and recovery.</span></div>
         </div>
       </div>
     </section>
 
-    <section class="agents reveal">
+    <section class="agents reveal" data-parallax-section>
       <div class="container grid-2">
-        <div class="section-label">Seating Options</div>
+        <div class="section-label" data-parallax="copy">Seating Options</div>
         <div>
-          <div class="large-copy">From one seat to a private room. <span class="muted">Pick the setup that matches your working rhythm.</span></div>
+          <div class="large-copy" data-parallax="copy">From one seat to a private room. <span class="muted">Pick the setup that matches your working rhythm.</span></div>
           <div class="agent-media">
-            <img src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
-            <img src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Dedicated desks at Root Space">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Dedicated desks at Root Space">
           </div>
-          <p class="agent-copy">Choose cabins for privacy, desks for flexibility, and shared zones for collaboration. <span class="muted">Root Space is built for startups, remote teams, consultants, creators, and growing local businesses.</span></p>
-          <a class="cta" href="#contact">Check Availability <span aria-hidden="true">→</span></a>
+          <p class="agent-copy" data-parallax="copy">Choose cabins for privacy, desks for flexibility, and shared zones for collaboration. <span class="muted">Root Space is built for startups, remote teams, consultants, creators, and growing local businesses.</span></p>
+          <a class="cta" href="#contact" data-parallax="copy">Check Availability <span aria-hidden="true">→</span></a>
         </div>
       </div>
     </section>
 
-    <section class="testimonials reveal">
+    <section class="testimonials reveal" data-parallax-section>
       <div class="container">
-        <h2 class="section-title">Work. Connect. <span class="muted">Belong.</span></h2>
+        <h2 class="section-title" data-parallax="copy">Work. Connect. <span class="muted">Belong.</span></h2>
       </div>
       <div class="testimonial-track">
-        <div class="quote">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
-        <div class="quote">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
-        <div class="quote">A pantry, lounge, and everyday services that keep work friction low.<strong>Stay comfortable</strong></div>
-        <div class="quote">A large Bhopal coworking space designed for focus, calls, and collaboration.<strong>Scale calmly</strong></div>
-        <div class="quote">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
-        <div class="quote">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
+        <div class="quote" data-parallax="card">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
+        <div class="quote" data-parallax="card">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
+        <div class="quote" data-parallax="card">A pantry, lounge, and everyday services that keep work friction low.<strong>Stay comfortable</strong></div>
+        <div class="quote" data-parallax="card">A large Bhopal coworking space designed for focus, calls, and collaboration.<strong>Scale calmly</strong></div>
+        <div class="quote" data-parallax="card">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
+        <div class="quote" data-parallax="card">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
       </div>
     </section>
 
-    <section class="services reveal">
+    <section class="services reveal" data-parallax-section>
       <div class="container">
         <div class="grid-2">
-          <div class="section-label">Inside The Space</div>
-          <h2 class="section-title">The rooms do the talking.</h2>
+          <div class="section-label" data-parallax="copy">Inside The Space</div>
+          <h2 class="section-title" data-parallax="copy">The rooms do the talking.</h2>
         </div>
         <div class="service-list">
-          <div class="service">
-            <img src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
+          <div class="service" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
             <span></span>
             <p>Cabins with clean partitions, warm lighting, and enough quiet for actual deep work.</p>
             <div class="service-name">Cabins</div>
           </div>
-          <div class="service">
-            <img src="drive-assets/root-space/optimized/220-dsc00936.webp" alt="Lounge and pantry area at Root Space">
+          <div class="service" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/220-dsc00936.webp" alt="Lounge and pantry area at Root Space">
             <span></span>
             <p>A casual lounge setup for breaks, informal meetings, or a change of posture.</p>
             <div class="service-name">Lounge</div>
           </div>
-          <div class="service">
-            <img src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception and pantry area at Root Space">
+          <div class="service" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception and pantry area at Root Space">
             <span></span>
             <p>A reception and service zone that gives the space a polished first impression.</p>
             <div class="service-name">Pantry</div>
@@ -1157,25 +1195,25 @@
       </div>
     </section>
 
-    <section class="support reveal">
+    <section class="support reveal" data-parallax-section>
       <div class="container">
         <div class="grid-2">
-          <h2 class="section-title">Why choose a coworking space?</h2>
-          <p class="center-text">Because the best office is the one you do not have to build, maintain, or overcommit to.</p>
+          <h2 class="section-title" data-parallax="copy">Why choose a coworking space?</h2>
+          <p class="center-text" data-parallax="copy">Because the best office is the one you do not have to build, maintain, or overcommit to.</p>
         </div>
         <div class="support-items">
-          <div class="support-item">
-            <img src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Exterior of Root Space">
+          <div class="support-item" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Exterior of Root Space">
             <h3>No infra cost</h3>
             <p>Skip fit-outs, furniture, maintenance, internet setup, and utilities.</p>
           </div>
-          <div class="support-item">
-            <img src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Work desks with planters">
+          <div class="support-item" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Work desks with planters">
             <h3>Join and quit anytime</h3>
             <p>Stay flexible as your team size, projects, and city plans change.</p>
           </div>
-          <div class="support-item">
-            <img src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Small private room at Root Space">
+          <div class="support-item" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Small private room at Root Space">
             <h3>Professional address</h3>
             <p>Meet clients in a polished workspace instead of improvising every meeting.</p>
           </div>
@@ -1183,32 +1221,32 @@
       </div>
     </section>
 
-    <section class="posts reveal">
+    <section class="posts reveal" data-parallax-section>
       <div class="container">
         <div class="grid-2">
-          <h2 class="section-title">A closer look.</h2>
-          <p class="center-text">Real photos from the centre: warm rooms, functional seating, and a space that feels ready from day one.</p>
+          <h2 class="section-title" data-parallax="copy">A closer look.</h2>
+          <p class="center-text" data-parallax="copy">Real photos from the centre: warm rooms, functional seating, and a space that feels ready from day one.</p>
         </div>
         <div class="post-list">
-          <article class="post">
-            <img src="drive-assets/root-space/optimized/520-dsc01236.webp" alt="Window seating at Root Space">
+          <article class="post" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/520-dsc01236.webp" alt="Window seating at Root Space">
             <div><time>Gallery</time><h3>Natural light and indoor plants</h3><p>Work areas are softened with planters, warm surfaces, and clean lines.</p></div>
           </article>
-          <article class="post">
-            <img src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception desk at Root Space">
+          <article class="post" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception desk at Root Space">
             <div><time>Front Desk</time><h3>A proper arrival experience</h3><p>The reception area sets the tone for visitors, interviews, and client meetings.</p></div>
           </article>
-          <article class="post">
-            <img src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private room at Root Space">
+          <article class="post" data-parallax="card">
+            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private room at Root Space">
             <div><time>Rooms</time><h3>Private zones when you need them</h3><p>Cabins and meeting spaces give small teams the privacy of an office without the lock-in.</p></div>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="final-cta reveal" id="contact">
-      <img src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Root Space exterior in Bhopal">
-      <div class="final-cta-content">
+    <section class="final-cta reveal" id="contact" data-parallax-section>
+      <img data-parallax="image" src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Root Space exterior in Bhopal">
+      <div class="final-cta-content" data-parallax="copy">
         <h2 class="section-title">Visit Root Space. <span class="muted">See the setup before you choose.</span></h2>
         <div class="cta-row">
           <a class="cta" href="https://wa.me/" target="_blank" rel="noreferrer">WhatsApp Enquiry <span aria-hidden="true">→</span></a>
@@ -1245,6 +1283,8 @@
   </footer>
 
   <script>
+    document.documentElement.classList.add("parallax-ready");
+
     const hero = document.querySelector("#hero");
     const layers = {
       back: document.querySelector("[data-depth='back']"),
@@ -1266,6 +1306,7 @@
 
     let targetProgress = 0;
     let renderProgress = 0;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function readProgress() {
       const rect = hero.getBoundingClientRect();
@@ -1304,7 +1345,7 @@
     renderHero(renderProgress);
     window.addEventListener("scroll", updateHeroTarget, { passive: true });
     window.addEventListener("resize", updateHeroTarget);
-    requestAnimationFrame(animateHero);
+    if (!prefersReducedMotion) requestAnimationFrame(animateHero);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -1313,6 +1354,67 @@
     }, { threshold: 0.18 });
 
     document.querySelectorAll(".reveal").forEach((section) => observer.observe(section));
+
+    const parallaxItems = Array.from(document.querySelectorAll("[data-parallax]")).map((element, index) => ({
+      element,
+      index,
+      rendered: 0
+    }));
+
+    function elementProgress(element) {
+      const rect = element.getBoundingClientRect();
+      const viewport = window.innerHeight || 1;
+      return clamp((viewport - rect.top) / (viewport + rect.height));
+    }
+
+    function revealProgress(progress, offset = 0) {
+      return smoothstep((progress - offset) / 0.42);
+    }
+
+    function renderParallaxItem(item) {
+      const { element, index } = item;
+      const type = element.dataset.parallax;
+      const progress = item.rendered;
+      const centered = progress * 2 - 1;
+      const stagger = type === "card" ? (index % 4) * 0.035 : 0;
+      const reveal = revealProgress(progress, stagger);
+
+      if (type === "image") {
+        const drift = centered * -34;
+        element.style.transform = `translate3d(0, ${drift}px, 0) scale(1.06)`;
+        element.style.opacity = "1";
+        return;
+      }
+
+      const lift = (1 - reveal) * 30;
+      const drift = centered * -8;
+      element.style.transform = `translate3d(0, ${lift + drift}px, 0)`;
+      element.style.opacity = `${0.18 + reveal * 0.82}`;
+    }
+
+    function animatePageParallax() {
+      parallaxItems.forEach((item) => {
+        const next = elementProgress(item.element);
+        item.rendered += (next - item.rendered) * 0.14;
+        if (Math.abs(next - item.rendered) < 0.0005) item.rendered = next;
+        renderParallaxItem(item);
+      });
+      requestAnimationFrame(animatePageParallax);
+    }
+
+    if (prefersReducedMotion) {
+      document.querySelectorAll(".reveal").forEach((section) => section.classList.add("in-view"));
+      parallaxItems.forEach(({ element }) => {
+        element.style.opacity = "1";
+        element.style.transform = "none";
+      });
+    } else {
+      parallaxItems.forEach((item) => {
+        item.rendered = elementProgress(item.element);
+        renderParallaxItem(item);
+      });
+      requestAnimationFrame(animatePageParallax);
+    }
   </script>
 </body>
 </html>
