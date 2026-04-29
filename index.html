@@ -7,8 +7,12 @@
   <style>
     :root {
       --ink: #151717;
-      --muted: rgba(21, 23, 23, 0.5);
-      --asset-dir: "FIND Real Estate _ Purchase, Rent or Sell Commercial and Residential Real Estate_files";
+      --paper: #ffffff;
+      --soft: #f4f4f0;
+      --mist: #ecece7;
+      --line: rgba(21, 23, 23, .14);
+      --muted: rgba(21, 23, 23, .58);
+      --dark-muted: rgba(244, 244, 240, .62);
     }
 
     * {
@@ -17,12 +21,14 @@
 
     html {
       font-size: 10px;
-      background: #fff;
+      background: var(--paper);
+      scroll-behavior: smooth;
     }
 
     body {
       margin: 0;
       color: var(--ink);
+      background: var(--paper);
       font-family: Arial, Helvetica, sans-serif;
       overflow-x: hidden;
     }
@@ -32,985 +38,757 @@
       text-decoration: none;
     }
 
-    .site-header {
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .nav-shell {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 20;
-      height: 5.6rem;
-      display: flex;
+      top: 2rem;
+      left: 50%;
+      z-index: 50;
+      width: min(98rem, calc(100% - 3.2rem));
+      height: 6.4rem;
+      transform: translateX(-50%);
+      display: grid;
+      grid-template-columns: 18rem 1fr auto;
       align-items: center;
-      padding: 0 7rem;
-      color: var(--ink);
+      gap: 2rem;
+      padding: .7rem .8rem .7rem 2.2rem;
+      border: 1px solid rgba(255, 255, 255, .45);
+      border-radius: 99rem;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 1.8rem 6rem rgba(21, 23, 23, .12);
+      backdrop-filter: blur(22px);
     }
 
     .brand {
-      width: 6.6rem;
-      height: 2rem;
-      display: block;
-    }
-
-    .brand svg {
-      width: 100%;
-      height: 100%;
-      display: block;
-    }
-
-    .root-brand {
-      width: 8.8rem;
-      height: 4.4rem;
-      margin-top: .4rem;
+      display: inline-flex;
+      align-items: center;
+      width: 11rem;
+      height: 4rem;
     }
 
     .brand img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: contain;
       object-position: left center;
     }
 
-    .nav {
-      position: absolute;
-      left: 50%;
-      transform: translateX(-50%);
+    .nav-links {
       display: flex;
-      align-items: center;
-      gap: 3.2rem;
-      font-size: 1.6rem;
-      line-height: 1;
-      white-space: nowrap;
-    }
-
-    .nav span {
-      display: inline-flex;
-      align-items: center;
-      gap: .65rem;
-    }
-
-    .sign-in {
-      margin-left: auto;
-      height: 4.2rem;
-      min-width: 8.9rem;
-      border-radius: 99rem;
-      display: inline-flex;
-      align-items: center;
       justify-content: center;
-      background: var(--ink);
-      color: #fff;
-      font-size: 1.4rem;
+      gap: 3.2rem;
+      color: rgba(21, 23, 23, .62);
+      font-size: 1.45rem;
       font-weight: 600;
     }
 
-    .hero {
-      position: relative;
-      height: 500vh;
-      margin-top: -5.6rem;
-      margin-bottom: -100vh;
-      opacity: 0;
-      animation: hero-in .7s ease .18s forwards;
+    .nav-actions {
+      display: flex;
+      gap: .8rem;
     }
 
-    .hero-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .scene,
-    .back {
-      position: absolute;
-      inset: 0;
-    }
-
-    .scene {
-      overflow: hidden;
-      pointer-events: none;
-    }
-
-    .layer-img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      user-select: none;
-      -webkit-user-drag: none;
-    }
-
-    .back {
-      transform-origin: center;
-      transform: scale(1.06);
-      animation: back-in 4.5s cubic-bezier(.16, 1, .3, 1) .18s forwards;
-    }
-
-    .house {
-      position: absolute;
-      top: 48vh;
-      left: 8vw;
-      right: 8vw;
-      height: min(62rem, 58vh);
-      z-index: 2;
-      transform-origin: bottom center;
-      will-change: transform, opacity;
-    }
-
-    .house img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: bottom center;
-      display: block;
-      filter: drop-shadow(0 4.2rem 5.5rem rgba(21, 23, 23, .22));
-    }
-
-    .house img {
-      animation: house-in 3s cubic-bezier(.16, 1, .3, 1) .2s both;
-    }
-
-    .clouds {
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      will-change: transform;
-    }
-
-    .cloud {
-      position: absolute;
-      z-index: 4;
-      will-change: transform;
-      animation: cloud-in 3.4s cubic-bezier(.16, 1, .3, 1) .15s both;
-    }
-
-    .cloud:first-child {
-      top: 25%;
-      left: -33.72rem;
-      width: 112.4rem;
-      height: 47.7rem;
-    }
-
-    .cloud:last-child {
-      top: 20%;
-      right: -33.72rem;
-      width: 93.6rem;
-      height: 39.7rem;
-      animation-delay: .25s;
-    }
-
-    .smoke {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 62rem;
-      z-index: 5;
-      transform: translateY(70%);
-      will-change: transform;
-    }
-
-    .smoke img {
-      object-position: top center;
-    }
-
-    .content {
-      position: relative;
-      z-index: 8;
-      height: 100%;
-      display: block;
-      padding: 0 4rem 22.8rem;
-      text-align: center;
-      will-change: transform, opacity;
-    }
-
-    .content-inner {
-      padding-top: 18.2rem;
-      transform: translateY(.6rem);
-      animation: copy-in 1.2s cubic-bezier(.16, 1, .3, 1) .35s forwards;
-      opacity: 0;
-    }
-
-    h1 {
-      width: min(128rem, 100%);
-      margin: 0 auto;
-      font-size: clamp(5rem, 6.1vw, 8.4rem);
-      line-height: 1;
-      letter-spacing: -.055em;
-      font-weight: 800;
-      white-space: normal;
-      text-wrap: balance;
-    }
-
-    .subcopy {
-      margin: 1.1rem 0 0;
-      font-size: clamp(1.7rem, 1.76vw, 2.4rem);
-      line-height: 1.3;
-      font-weight: 500;
-      color: var(--muted);
-      text-wrap: balance;
-    }
-
-    .subcopy strong {
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .cta {
-      margin: 3rem auto 0;
-      height: 4.2rem;
-      padding: 0 2.4rem;
+    .pill {
+      min-height: 4.8rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: .9rem;
+      padding: 0 2.2rem;
       border: 0;
       border-radius: 99rem;
       background: var(--ink);
       color: #fff;
-      display: inline-flex;
-      align-items: center;
-      gap: 1.2rem;
-      font: 600 1.4rem/1 Arial, Helvetica, sans-serif;
+      font-size: 1.45rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: transform .4s cubic-bezier(.16, 1, .3, 1), background .2s ease;
+      transition: transform .32s cubic-bezier(.16, 1, .3, 1), background .32s ease;
     }
 
-    .cta:hover {
-      transform: translateY(-1px) scale(1.015);
+    .pill.secondary {
+      background: rgba(255, 255, 255, .86);
+      color: var(--ink);
+    }
+
+    .pill:hover {
+      transform: translateY(-2px);
       background: #000;
     }
 
-    .bottom-fade {
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      height: 30.9rem;
-      z-index: 7;
-      background: linear-gradient(180deg, rgba(255,255,255,0), #fff);
-      pointer-events: none;
-    }
-
-    .after {
-      min-height: 100vh;
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
       display: grid;
       place-items: center;
-      background: #fff;
-      font-size: clamp(3rem, 5vw, 7.2rem);
-      line-height: 1;
-      letter-spacing: -.04em;
-      font-weight: 600;
-      text-align: center;
+      padding: 12rem 2.4rem 0;
+      background: var(--soft);
+      isolation: isolate;
     }
 
-    .after span {
-      color: #b3b3b3;
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
     }
 
-    .container {
-      width: min(128.3rem, calc(100% - 8rem));
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(.95);
+      transform: scale(1.06);
+    }
+
+    .hero:before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.82), rgba(244,244,240,.62) 52%, rgba(244,244,240,.94)),
+        linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.22) 52%, rgba(21,23,23,.18));
+    }
+
+    .hero-copy {
+      width: min(92rem, 100%);
       margin: 0 auto;
+      text-align: center;
+      transform: translateY(1rem);
+      animation: enter-copy .9s cubic-bezier(.16, 1, .3, 1) .15s both;
     }
 
-    .grid-2 {
-      display: grid;
-      grid-template-columns: minmax(18rem, 1fr) minmax(0, 1.32fr);
-      gap: 5.6rem;
-      align-items: start;
-    }
-
-    .section-label {
-      font-size: clamp(1.6rem, 1.5vw, 2rem);
-      line-height: 1.4;
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: .9rem;
+      margin-bottom: 2.4rem;
+      color: rgba(21, 23, 23, .66);
+      font-size: 1.4rem;
       font-weight: 700;
     }
 
-    .section-title {
+    .eyebrow:before {
+      content: "";
+      width: .7rem;
+      height: .7rem;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    h1 {
       margin: 0;
-      font-size: clamp(4.2rem, 5.25vw, 7.2rem);
-      line-height: 1;
-      letter-spacing: -.045em;
-      font-weight: 650;
+      font-size: clamp(5.8rem, 9.2vw, 13.2rem);
+      line-height: .92;
+      letter-spacing: 0;
+      font-weight: 500;
     }
 
-    .section-title .muted,
-    .large-copy .muted,
-    .steps-text .muted,
-    .agent-copy .muted {
-      color: #b3b3b3;
-    }
-
-    .large-copy {
-      font-size: clamp(3.2rem, 4vw, 5.6rem);
-      line-height: 1.08;
-      letter-spacing: -.035em;
+    .hero-sub {
+      width: min(64rem, 100%);
+      margin: 2.8rem auto 3.6rem;
+      color: rgba(21, 23, 23, .72);
+      font-size: clamp(1.8rem, 1.8vw, 2.3rem);
+      line-height: 1.42;
       font-weight: 600;
     }
 
-    [data-parallax-section] {
-      position: relative;
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
     }
 
-    [data-parallax] {
+    .hero-building {
+      position: absolute;
+      left: 50%;
+      bottom: -24rem;
+      z-index: -1;
+      width: min(34rem, 60vw);
+      transform: translateX(-50%);
+      pointer-events: none;
+      animation: enter-building 1.2s cubic-bezier(.16, 1, .3, 1) .18s both;
+    }
+
+    .hero-building img {
+      width: 100%;
+      filter: drop-shadow(0 4rem 5rem rgba(21, 23, 23, .22));
+    }
+
+    .ticker {
+      overflow: hidden;
+      padding: 2.2rem 0;
+      background: var(--ink);
+      color: var(--soft);
+      white-space: nowrap;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 28s linear infinite;
+    }
+
+    .ticker span {
+      padding: 0 4rem;
+      color: rgba(244, 244, 240, .82);
+      font-size: clamp(1.6rem, 1.5vw, 2rem);
+      font-weight: 700;
+    }
+
+    .difference {
+      min-height: 330vh;
+      background: var(--paper);
+    }
+
+    .difference-sticky {
+      position: sticky;
+      top: 0;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 10rem 2.4rem;
+      overflow: hidden;
+    }
+
+    .difference-title {
+      width: min(118rem, 100%);
+      margin: 0 auto;
+      text-align: center;
+      font-size: clamp(5.8rem, 10vw, 15rem);
+      line-height: .92;
+      letter-spacing: 0;
+      font-weight: 500;
+    }
+
+    .difference-word {
+      display: inline-block;
+      color: var(--ink);
       will-change: transform, opacity;
     }
 
-    [data-parallax="image"] {
-      transform: translate3d(0, 0, 0) scale(1.06);
-      transform-origin: center;
+    .difference-muted {
+      color: rgba(21, 23, 23, .18);
     }
 
-    .parallax-ready [data-parallax="copy"],
-    .parallax-ready [data-parallax="card"],
-    .parallax-ready [data-parallax="metric"] {
-      transform: translate3d(0, 2.8rem, 0);
-      opacity: 0;
+    .scrolling-cards {
+      min-height: 230vh;
+      background: var(--paper);
+      overflow: clip;
     }
 
-    .why {
-      padding: 12rem 0 7rem;
-    }
-
-    .why-copy {
-      margin: 0;
-    }
-
-    .why-video {
-      margin-top: 8rem;
-      position: relative;
-      height: min(58vw, 68rem);
-      overflow: hidden;
-      background: #f1f1f1;
-      clip-path: inset(0 round 0);
-    }
-
-    .why-video video,
-    .why-video img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .arrows-section {
-      min-height: 100vh;
+    .cards-sticky {
+      position: sticky;
+      top: 0;
+      min-height: 100svh;
       display: grid;
-      place-items: center;
-      padding: 12rem 0;
+      align-content: center;
+      gap: 5rem;
+      padding: 10rem 0;
       overflow: hidden;
     }
 
-    .arrows-title {
-      margin: 0;
-      text-align: center;
-      font-size: clamp(4rem, 6vw, 7.2rem);
-      line-height: 1;
-      letter-spacing: -.045em;
-      font-weight: 650;
-    }
-
-    .arrows-title span {
-      color: #b3b3b3;
-    }
-
-    .arrow-row {
-      margin: 8rem auto;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .cards-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
       gap: 4rem;
-      align-items: center;
     }
 
-    .arrow-row img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transform: translateX(-8%) scale(.94);
-      opacity: .4;
-      transition: transform 1.2s cubic-bezier(.16, 1, .3, 1), opacity 1.2s ease;
+    .cards-head h2 {
+      width: min(68rem, 100%);
     }
 
-    .in-view .arrow-row img {
-      transform: translateX(0) scale(1);
-      opacity: 1;
+    .cards-head p {
+      width: min(38rem, 100%);
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.8rem;
+      line-height: 1.45;
+      font-weight: 600;
     }
 
-    .arrow-row img:nth-child(2) { transition-delay: .1s; }
-    .arrow-row img:nth-child(3) { transition-delay: .2s; }
-    .arrow-row img:nth-child(4) { transition-delay: .3s; }
+    .card-rail-wrap {
+      width: 100vw;
+      overflow: hidden;
+    }
 
-    .metric-row {
-      margin: 8rem auto;
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+    .card-rail {
+      display: flex;
       gap: 2rem;
-      text-align: left;
+      width: max-content;
+      padding-left: max(2.4rem, calc((100vw - 118rem) / 2));
+      padding-right: max(2.4rem, calc((100vw - 118rem) / 2));
+      will-change: transform;
     }
 
-    .metric-row div {
-      min-height: 24rem;
+    .scroll-card {
+      flex: 0 0 min(42rem, 82vw);
+      min-height: 30rem;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 2.4rem 0 0;
-      border-top: 1px solid rgba(21, 23, 23, .18);
-      transition: transform .9s cubic-bezier(.16, 1, .3, 1), opacity .9s ease;
+      padding: 2.8rem;
+      border: 1px solid var(--line);
+      border-radius: .8rem;
+      background: var(--soft);
+      color: var(--ink);
     }
 
-    .metric-row [data-parallax="metric"] {
-      transition: none;
+    .scroll-card.dark {
+      background: var(--ink);
+      color: var(--soft);
     }
 
-    .metric-row div:nth-child(2) { transition-delay: .08s; }
-    .metric-row div:nth-child(3) { transition-delay: .16s; }
-    .metric-row div:nth-child(4) { transition-delay: .24s; }
-
-    .in-view .metric-row div {
-      transform: translateY(0);
-      opacity: 1;
+    .scroll-card small {
+      color: currentColor;
+      opacity: .5;
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-transform: uppercase;
     }
 
-    .metric-row strong {
-      font-size: clamp(3.2rem, 4vw, 5.6rem);
-      line-height: .95;
-      letter-spacing: -.045em;
-      font-weight: 700;
+    .scroll-card p {
+      margin: 4rem 0 0;
+      font-size: clamp(2.4rem, 2.6vw, 3.8rem);
+      line-height: 1.08;
+      letter-spacing: 0;
+      font-weight: 600;
     }
 
-    .metric-row span {
-      width: min(22rem, 100%);
-      color: rgba(21, 23, 23, .58);
-      font-size: 1.6rem;
-      line-height: 1.45;
-      font-weight: 500;
+    .proof {
+      padding: 12rem 0 9rem;
+      background: var(--paper);
     }
 
-    .center-text {
-      width: min(52rem, 100%);
+    .container {
+      width: min(118rem, calc(100% - 4.8rem));
       margin: 0 auto;
-      text-align: center;
-      font-size: clamp(1.8rem, 1.8vw, 2.4rem);
-      line-height: 1.45;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2.4rem;
+      border-top: 1px solid var(--line);
+    }
+
+    .metric {
+      min-height: 22rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 2.6rem;
+      color: var(--ink);
+      will-change: transform, opacity;
+    }
+
+    .metric strong {
+      font-size: clamp(3.4rem, 4.6vw, 6.8rem);
+      line-height: .92;
+      font-weight: 600;
+    }
+
+    .metric span {
+      width: min(22rem, 100%);
+      color: var(--muted);
+      font-size: 1.6rem;
+      line-height: 1.38;
+      font-weight: 600;
+    }
+
+    .workspace {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1fr 1.05fr;
+      gap: 6rem;
+      align-items: center;
+      padding: 12rem 0;
+      background: var(--paper);
+    }
+
+    .workspace-copy {
+      padding-left: max(2.4rem, calc((100vw - 118rem) / 2));
+    }
+
+    .label {
+      margin-bottom: 2rem;
+      color: rgba(21, 23, 23, .54);
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(4.2rem, 6.4vw, 8.8rem);
+      line-height: .98;
+      letter-spacing: 0;
       font-weight: 500;
     }
 
-    .rewired {
+    .lead {
+      margin: 2.4rem 0 3.2rem;
+      width: min(55rem, 100%);
+      color: var(--muted);
+      font-size: clamp(1.8rem, 1.7vw, 2.2rem);
+      line-height: 1.45;
+      font-weight: 600;
+    }
+
+    .workspace-photo {
+      height: min(70rem, 78vh);
+      overflow: hidden;
+      border-radius: 0;
+    }
+
+    .workspace-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transform: scale(1.08);
+      will-change: transform;
+    }
+
+    .coverage {
       padding: 12rem 0;
-      background: #202321;
-      color: #f4f4f0;
+      background: var(--ink);
+      color: var(--soft);
+      overflow: hidden;
     }
 
-    .steps-title {
-      margin: 0 0 4rem;
-      font-size: clamp(4.4rem, 5vw, 7.2rem);
-      line-height: .96;
-      letter-spacing: -.045em;
-      font-weight: 650;
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+      align-items: start;
     }
 
-    .steps-title .muted {
-      color: rgba(244, 244, 240, .48);
+    .coverage h2 span,
+    .faq h2 span,
+    .final h2 span {
+      color: rgba(244, 244, 240, .42);
     }
 
-    .steps-list {
-      counter-reset: step;
+    .coverage-list {
       display: grid;
       gap: 0;
-      padding: 1.2rem 3.2rem;
-      border-radius: 1.4rem;
-      background: #f7f7f4;
-      color: #151717;
-      overflow: hidden;
+      border-top: 1px solid rgba(244, 244, 240, .18);
     }
 
-    .step {
-      counter-increment: step;
-      position: relative;
-      padding: 3.6rem 0 3.6rem 8rem;
-      border-top: 1px solid rgba(21, 23, 23, .09);
-      font-size: clamp(2.4rem, 2.8vw, 4.4rem);
-      line-height: 1.08;
-      letter-spacing: -.03em;
+    .coverage-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      padding: 2.8rem 0;
+      border-bottom: 1px solid rgba(244, 244, 240, .18);
+      color: rgba(244, 244, 240, .9);
+      font-size: clamp(2.4rem, 2.6vw, 4rem);
+      line-height: 1.04;
       font-weight: 600;
+      will-change: transform, opacity;
     }
 
-    .step:last-child {
-      border-bottom: 1px solid rgba(21, 23, 23, .09);
+    .coverage-item span:last-child {
+      color: rgba(244, 244, 240, .36);
     }
 
-    .step:before {
-      content: counter(step, decimal-leading-zero);
-      position: absolute;
-      left: 0;
-      top: 4rem;
-      font-size: 1.6rem;
-      letter-spacing: 0;
-      color: #b3b3b3;
+    .steps {
+      min-height: 280vh;
+      background: var(--soft);
     }
 
-    .rewired .cta {
-      background: #f4f4f0;
-      color: #151717;
-    }
-
-    .agents {
-      padding: 12rem 0;
-    }
-
-    .agent-media {
+    .steps-sticky {
+      position: sticky;
+      top: 0;
+      min-height: 100svh;
       display: grid;
-      grid-template-columns: .72fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
       align-items: center;
+      padding: 10rem max(2.4rem, calc((100vw - 118rem) / 2));
       overflow: hidden;
     }
 
-    .agent-media img {
-      width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
-    }
-
-    .agent-media img:first-child {
-      margin-top: 34%;
-    }
-
-    .agent-copy {
-      margin-top: 4rem;
-      font-size: clamp(2.4rem, 2.7vw, 4.4rem);
-      line-height: 1.15;
-      letter-spacing: -.03em;
-      font-weight: 600;
-    }
-
-    .testimonials {
-      padding: 12rem 0;
-      background: #151717;
-      color: #f1f1f1;
-      overflow: hidden;
-    }
-
-    .testimonial-track {
-      margin-top: 7rem;
-      display: flex;
-      gap: 3rem;
-      animation: marquee 32s linear infinite;
-    }
-
-    .quote {
-      flex: 0 0 min(47rem, 80vw);
-      border-top: 1px solid rgba(241, 241, 241, .22);
-      padding-top: 3rem;
-      font-size: clamp(1.8rem, 1.6vw, 2.2rem);
-      line-height: 1.38;
-      color: rgba(241, 241, 241, .82);
-    }
-
-    .quote strong {
-      display: block;
-      margin-top: 2.8rem;
-      color: #fff;
-      font-size: 1.6rem;
-    }
-
-    @keyframes marquee {
-      to { transform: translateX(calc(-50% - 1.5rem)); }
-    }
-
-    .services {
-      padding: 12rem 0;
-    }
-
-    .service-list {
-      margin-top: 7rem;
-      display: grid;
-    }
-
-    .service {
+    .step-visual {
       position: relative;
-      min-height: 19rem;
-      border-top: 1px solid rgba(21, 23, 23, .12);
-      display: grid;
-      grid-template-columns: 1fr minmax(0, 1.8fr) 18rem;
-      align-items: center;
-      gap: 4rem;
+      height: min(68rem, 74vh);
       overflow: hidden;
-      color: #fff;
+      background: var(--mist);
     }
 
-    .service:last-child {
-      border-bottom: 1px solid rgba(21, 23, 23, .12);
-    }
-
-    .service img {
+    .step-visual img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0;
-      transition: transform .8s cubic-bezier(.16, 1, .3, 1);
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity .7s ease, transform .9s cubic-bezier(.16, 1, .3, 1);
     }
 
-    .service:after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      z-index: 1;
-      background: rgba(0,0,0,.42);
-    }
-
-    .service:hover img {
+    .step-visual img.active {
+      opacity: 1;
       transform: scale(1);
     }
 
-    .service > *:not(img) {
-      position: relative;
-      z-index: 2;
-    }
-
-    .service p {
-      margin: 0;
-      font-size: clamp(1.8rem, 2vw, 2.8rem);
-      line-height: 1.18;
-      font-weight: 600;
-      text-wrap: balance;
-    }
-
-    .service-name {
-      justify-self: end;
-      padding-right: 3rem;
-      font-size: clamp(2.4rem, 3vw, 4.4rem);
-      font-weight: 700;
-    }
-
-    .support {
-      padding: 12rem 0;
-      background: #f1f1f1;
-    }
-
-    .support-items {
-      margin-top: 7rem;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2.4rem;
-    }
-
-    .support-item img {
-      width: 100%;
-      aspect-ratio: 1.18;
-      object-fit: cover;
-      display: block;
-    }
-
-    .support-item {
-      overflow: hidden;
-    }
-
-    .support-item h3 {
-      margin: 2rem 0 1rem;
-      font-size: clamp(2rem, 2.2vw, 3.2rem);
-      line-height: 1.1;
-      letter-spacing: -.03em;
-    }
-
-    .support-item p {
-      margin: 0;
-      color: rgba(21, 23, 23, .66);
-      font-size: 1.7rem;
-      line-height: 1.45;
-    }
-
-    .posts {
-      padding: 12rem 0;
-      background: #151717;
-      color: #f1f1f1;
-    }
-
-    .post-list {
-      margin-top: 7rem;
+    .step-copy {
       display: grid;
       gap: 3rem;
     }
 
-    .post {
-      display: grid;
-      grid-template-columns: 28rem 1fr;
-      gap: 4rem;
-      padding-top: 3rem;
-      border-top: 1px solid rgba(241, 241, 241, .2);
-      overflow: hidden;
+    .step-card {
+      border-top: 1px solid rgba(21, 23, 23, .16);
+      padding-top: 2.4rem;
+      opacity: .34;
+      transform: translateY(1.6rem);
+      transition: opacity .5s ease, transform .5s cubic-bezier(.16, 1, .3, 1);
     }
 
-    .post img {
-      width: 100%;
-      aspect-ratio: 1.55;
-      object-fit: cover;
+    .step-card.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .step-card small {
       display: block;
-    }
-
-    .post time {
-      color: rgba(241, 241, 241, .55);
+      margin-bottom: 1.4rem;
+      color: rgba(21, 23, 23, .42);
       font-size: 1.4rem;
+      font-weight: 800;
     }
 
-    .post h3 {
-      margin: 1.4rem 0 1rem;
-      font-size: clamp(2.4rem, 2.5vw, 3.8rem);
-      line-height: 1.08;
-      letter-spacing: -.035em;
-    }
-
-    .post p {
+    .step-card h3 {
       margin: 0;
-      color: rgba(241, 241, 241, .68);
-      font-size: 1.7rem;
-      line-height: 1.45;
+      font-size: clamp(2.6rem, 3vw, 4.4rem);
+      line-height: 1.06;
+      font-weight: 600;
     }
 
-    .final-cta {
-      min-height: 72vh;
+    .step-card p {
+      margin: 1.2rem 0 0;
+      color: var(--muted);
+      font-size: 1.7rem;
+      line-height: 1.42;
+      font-weight: 600;
+    }
+
+    .faq {
+      padding: 12rem 0;
+      background: var(--paper);
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: .85fr 1.15fr;
+      gap: 8rem;
+    }
+
+    details {
+      border-top: 1px solid var(--line);
+      padding: 2.4rem 0;
+    }
+
+    details:last-child {
+      border-bottom: 1px solid var(--line);
+    }
+
+    summary {
+      cursor: pointer;
+      list-style: none;
+      font-size: clamp(2rem, 2vw, 2.8rem);
+      line-height: 1.18;
+      font-weight: 700;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details p {
+      margin: 1.6rem 0 0;
+      color: var(--muted);
+      font-size: 1.7rem;
+      line-height: 1.48;
+      font-weight: 600;
+    }
+
+    .final {
       position: relative;
+      min-height: 86svh;
       display: grid;
       place-items: center;
-      text-align: center;
       overflow: hidden;
       color: #fff;
+      text-align: center;
+      background: var(--ink);
     }
 
-    .final-cta img {
+    .final img {
       position: absolute;
       inset: 0;
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0;
+      opacity: .52;
+      transform: scale(1.08);
+      will-change: transform;
     }
 
-    .final-cta:after {
+    .final:after {
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,.28);
-      z-index: 1;
+      background: rgba(0, 0, 0, .34);
     }
 
-    .final-cta-content {
+    .final-content {
       position: relative;
       z-index: 2;
-      padding: 4rem;
+      width: min(92rem, calc(100% - 4rem));
     }
 
-    .final-cta .muted {
-      color: rgba(255, 255, 255, .68);
-    }
-
-    .cta-row {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1.2rem;
-      margin-top: 3rem;
-    }
-
-    .cta-row .cta {
-      margin: 0;
-    }
-
-    .secondary-cta {
-      background: rgba(255, 255, 255, .16);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, .28);
-      backdrop-filter: blur(14px);
-    }
-
-    .secondary-cta:hover {
-      background: rgba(255, 255, 255, .24);
+    .final .lead {
+      margin-left: auto;
+      margin-right: auto;
+      color: rgba(255, 255, 255, .76);
     }
 
     .site-footer {
-      padding: 7rem 0 4rem;
-      background: #151717;
-      color: #f1f1f1;
+      padding: 5rem 0;
+      background: var(--ink);
+      color: rgba(244, 244, 240, .6);
+      font-size: 1.4rem;
     }
 
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.4fr .8fr .8fr;
-      gap: 4rem;
-    }
-
-    .footer-title {
-      font-size: clamp(2.8rem, 3.2vw, 4.4rem);
-      line-height: 1;
-      letter-spacing: -.035em;
-      font-weight: 650;
-    }
-
-    .footer-links {
-      display: grid;
-      gap: 1.3rem;
-      font-size: 1.5rem;
-      color: rgba(241,241,241,.72);
-    }
-
-    .copyright {
-      margin-top: 8rem;
+    .footer-row {
       display: flex;
       justify-content: space-between;
       gap: 2rem;
-      color: rgba(241,241,241,.5);
-      font-size: 1.3rem;
+      border-top: 1px solid rgba(244, 244, 240, .16);
+      padding-top: 3rem;
     }
 
-    .mask-defs {
-      position: absolute;
-      width: 0;
-      height: 0;
-      overflow: hidden;
+    [data-reveal] {
+      opacity: 0;
+      transform: translateY(2.4rem);
+      transition: opacity .9s ease, transform .9s cubic-bezier(.16, 1, .3, 1);
     }
 
-    @keyframes hero-in {
-      to { opacity: 1; }
+    [data-reveal].visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    @keyframes back-in {
-      to { transform: scale(1); }
+    @keyframes enter-copy {
+      from {
+        opacity: 0;
+        transform: translateY(2rem);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
-    @keyframes house-in {
-      from { transform: translateY(50%); }
-      to { transform: translateY(0); }
+    @keyframes enter-building {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 8rem) scale(.92);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1);
+      }
     }
 
-    @keyframes cloud-in {
-      from { opacity: 0; transform: translateY(10%); }
-      to { opacity: 1; transform: translateY(0); }
+    @keyframes marquee {
+      to {
+        transform: translateX(-50%);
+      }
     }
 
-    @keyframes copy-in {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 767px) {
-      .site-header {
-        height: 5.7rem;
-        padding: 0 2.4rem;
+    @media (max-width: 900px) {
+      .nav-shell {
+        grid-template-columns: 1fr auto;
+        top: 1.2rem;
+        height: 5.8rem;
+        padding-left: 1.6rem;
       }
 
-      .nav,
-      .sign-in {
+      .nav-links,
+      .pill.secondary {
         display: none;
       }
 
-      .brand {
-        width: 5rem;
-      }
-
-      .root-brand {
-        width: 7.2rem;
-        height: 3.6rem;
-      }
-
       .hero {
-        height: 350vh;
-        margin-top: -5.7rem;
+        padding-top: 10rem;
       }
 
-      .container {
-        width: calc(100% - 3.2rem);
-      }
-
-      .grid-2,
-      .agent-media,
-      .service,
-      .support-items,
-      .post,
-      .footer-grid {
+      .metrics,
+      .workspace,
+      .coverage-grid,
+      .steps-sticky,
+      .cards-head,
+      .faq-grid {
         grid-template-columns: 1fr;
       }
 
-      .why,
-      .arrows-section,
-      .rewired,
-      .agents,
-      .testimonials,
-      .services,
-      .support,
-      .posts {
-        padding: 7rem 0;
+      .cards-head {
+        display: grid;
       }
 
-      .arrow-row {
-        gap: 1.5rem;
-        margin: 5rem auto;
+      .metrics {
+        gap: 0;
       }
 
-      .metric-row {
-        grid-template-columns: 1fr;
-        margin: 5rem auto;
+      .metric {
+        min-height: 13rem;
+        border-bottom: 1px solid var(--line);
       }
 
-      .metric-row div {
-        min-height: 14rem;
+      .workspace {
+        gap: 4rem;
+        padding: 8rem 0;
       }
 
-      .step {
-        padding-left: 4.8rem;
+      .workspace-copy {
+        padding: 0 2.4rem;
       }
 
-      .service {
-        min-height: 25rem;
-        padding: 3rem 2rem;
+      .workspace-photo,
+      .step-visual {
+        height: 48rem;
       }
 
-      .service-name {
-        justify-self: start;
-        padding-right: 0;
+      .coverage,
+      .proof,
+      .cards-sticky,
+      .faq {
+        padding: 8rem 0;
       }
 
-      .cta-row {
+      .steps {
+        min-height: auto;
+      }
+
+      .steps-sticky {
+        position: relative;
+        padding: 8rem 2.4rem;
+      }
+
+      .footer-row {
         flex-direction: column;
-        align-items: center;
-      }
-
-      .copyright {
-        flex-direction: column;
-      }
-
-      .content {
-        padding: 0 2rem 15rem;
-      }
-
-      .content-inner {
-        padding-top: 16rem;
-      }
-
-      .house {
-        top: 52vh;
-        left: 3vw;
-        right: 3vw;
-        height: 38rem;
-      }
-
-      .cloud:first-child {
-        top: 33.7rem;
-        left: -57.2rem;
-        width: 70.2rem;
-        height: 29.8rem;
-      }
-
-      .cloud:last-child {
-        top: 37.12rem;
-        right: -41.2rem;
-        width: 55.7rem;
-        height: 23.6rem;
-      }
-
-      .smoke {
-        height: 45rem;
-      }
-
-      h1 {
-        letter-spacing: -.02em;
-        white-space: normal;
       }
     }
 
@@ -1021,413 +799,307 @@
         animation-duration: .01ms !important;
         animation-iteration-count: 1 !important;
         scroll-behavior: auto !important;
+        transition: none !important;
       }
 
-      [data-parallax],
-      .metric-row div,
-      .arrow-row img {
+      [data-reveal],
+      .difference-word,
+      .metric,
+      .coverage-item,
+      .card-rail {
         opacity: 1 !important;
         transform: none !important;
-        transition: none !important;
       }
     }
   </style>
 </head>
 <body>
-  <svg class="mask-defs" aria-hidden="true">
-    <defs>
-      <mask id="find-mask" maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-        <rect width="1" height="1" fill="black"></rect>
-        <svg viewBox="0 0 977 423" preserveAspectRatio="none" width="1" height="1">
-          <g fill="white">
-            <path d="M836.06 1.01c77.3 0 139.94 62.69 139.94 140C976 218.33 913.35 281 836.06 281H702.61V1.01zm-52.82 80.17v119.44h44.58a59.5 59.5 0 0 0 42.21-17.5 59.7 59.7 0 0 0-42.2-101.94z"></path>
-            <path d="M595.45 183.2V1h80.14v279.99H556.68l-73.33-152.93V281H403.2V1h110.33z"></path>
-            <path d="M376.19 280.99h-141l61.26-140.29L235.2 1h141v279.99Z"></path>
-            <path d="M244.55 81.28H81.14v59.42h101.02v80.17H81.14v60.12H1V1h207.91z"></path>
-            <path d="M610.88 350.4h18.48v13.96h-18.48v31.8c0 3.36.95 6.05 3 7.89 2.03 1.82 5.08 2.63 8.92 2.63 1.47 0 2.85-.14 4.15-.44.8-.19 1.6-.4 2.41-.63v14c-1.04.47-2.48.88-4.34 1.19a42 42 0 0 1-7.12.54c-9 0-15.5-2.16-19.73-6.29-4.13-4.22-6.29-10.69-6.29-19.59v-31.1h-13.3V350.4h13.3v-16.26l19-7.1z"></path>
-            <path d="M732.73 350.6h18.48v13.96h-18.48v31.8c0 3.36.94 6.05 3 7.89 2.03 1.82 5.07 2.63 8.92 2.63 1.46 0 2.85-.14 4.14-.44.8-.19 1.61-.4 2.42-.63v14c-1.05.47-2.49.87-4.35 1.18a41.7 41.7 0 0 1-7.11.55c-9 0-15.51-2.16-19.74-6.29-4.13-4.22-6.28-10.69-6.28-19.59v-31.1h-13.3V350.6h13.3v-16.27l19-7.09z"></path>
-            <path d="M546.65 349c9.3 0 16.6 1.89 21.98 5.56v.01c5.05 3.36 7.93 7.96 8.69 13.85h-16.84a8.17 8.17 0 0 0-4.25-5.34c-2.46-1.42-5.83-2.08-10-2.08-3.8 0-6.8.56-8.9 1.81a5.9 5.9 0 0 0-3.16 5.35c0 2.04.93 3.69 2.67 4.88l.02.02h.02c1.65 1.04 4.26 1.9 7.74 2.66l12.89 2.66c7.04 1.46 12.24 4.18 15.7 8.08v.02a19.26 19.26 0 0 1 5.34 13.6c0 6.48-2.45 11.52-7.36 15.21l-.48.35c-5.18 3.66-12.64 5.56-22.52 5.56-10.33 0-18.42-2.08-24.36-6.13-5.6-3.82-8.77-8.98-9.54-15.53h16.83a10.8 10.8 0 0 0 5.06 7.13l.02.01.02.01c3 1.7 7.02 2.51 11.97 2.51 4.43 0 7.84-.6 10.04-1.97h.02a7.14 7.14 0 0 0 3.54-6.31c0-2.01-.7-3.67-2.18-4.82-1.33-1.21-3.65-2.09-6.73-2.74l-11.49-2.38c-8.15-1.7-14.1-4.2-17.93-7.43l-.37-.32c-3.78-3.44-5.68-7.83-5.68-13.25 0-6.6 2.52-11.66 7.56-15.29h.01c5.09-3.75 12.27-5.69 21.67-5.69"></path>
-            <path d="M508.46 321v14.52h-51.8v26.64h48.58v14.24h-48.58v28.88h53.48v14.52H437.1V321z"></path>
-            <path d="M404.3 321v98.8h-19V321z"></path>
-            <path d="M345.13 349c10.13 0 17.7 2.26 22.87 6.62 5.14 4.35 7.76 10.62 7.76 18.98v31.5c0 2.37.15 4.8.43 7.25v.05c.33 2 .79 4.14 1.37 6.4h-18.92c-.45-1.78-.8-3.68-1.04-5.68a89 89 0 0 1-.24-5l-1.89-.43a22.06 22.06 0 0 1-7.67 8.61c-4 2.58-8.94 3.9-14.86 3.9-6.92 0-12.3-1.73-16.28-5.08-3.96-3.43-5.96-7.95-5.96-13.66 0-6.34 2.35-11.37 7.06-15.18 4.85-3.96 11.65-6.57 20.5-7.77l17.64-2.49.87-.12v-4.54c0-3.14-1.08-5.68-3.3-7.48-2.12-1.9-5.2-2.76-9.05-2.76-3.64 0-6.68.62-9.03 1.95h-.01a9.6 9.6 0 0 0-4.28 5.19h-18.11c1.1-5.64 4.2-10.35 9.35-14.16 5.46-4.03 13.02-6.1 22.79-6.1m10.48 38.26-14.13 2.17c-3.82.57-6.78 1.64-8.76 3.3-2.03 1.71-3.02 4.06-3.02 6.93 0 2.6.96 4.7 2.94 6.13 1.9 1.37 4.37 2.01 7.3 2.01 4.58 0 8.53-1.22 11.8-3.7h.02v-.01c3.26-2.57 5-5.64 5-9.19v-7.81l-1.15.18Z"></path>
-            <path d="M196.08 321c7.17 0 13.36 1.24 18.62 3.69h.01c5.26 2.36 9.3 5.7 12.18 10 2.86 4.3 4.31 9.33 4.31 15.13 0 5.7-1.44 10.68-4.3 14.98-2.88 4.21-6.92 7.55-12.19 10a42.7 42.7 0 0 1-14.92 3.45l-2.06.13 1.37 1.53 35.63 39.89h-26.4l-31.72-41.05-.3-.39h-4.75v41.44H152V321zm-24.52 43.54h23.96c5.27 0 9.46-1.2 12.41-3.74 3.06-2.65 4.55-6.3 4.55-10.84 0-4.6-1.43-8.22-4.4-10.7-2.96-2.55-7.2-3.74-12.56-3.74h-23.96z"></path>
-          </g>
-        </svg>
-      </mask>
-    </defs>
-  </svg>
-
-  <header class="site-header">
-    <a class="brand root-brand" href="#" aria-label="Root Space">
+  <header class="nav-shell" aria-label="Primary">
+    <a class="brand" href="#top" aria-label="Root Space">
       <img src="drive-assets/root-space/optimized/root-space-logo-cropped.webp" alt="Root Space">
     </a>
-    <nav class="nav" aria-label="Primary">
-      <a href="#">Home</a>
-      <a href="#">Facilities</a>
-      <a href="#">Seating</a>
-      <a href="#">Gallery</a>
-      <a href="#">Contact</a>
+    <nav class="nav-links">
+      <a href="#difference">Why Root Space</a>
+      <a href="#seating">Seating</a>
+      <a href="#facilities">Facilities</a>
+      <a href="#contact">Contact</a>
     </nav>
-    <a href="#contact" class="sign-in">Enquire</a>
+    <div class="nav-actions">
+      <a class="pill secondary" href="#seating">See spaces</a>
+      <a class="pill" href="#contact">Book a tour →</a>
+    </div>
   </header>
 
-  <main>
-    <section class="hero" id="hero">
-      <div class="hero-sticky">
-        <div class="scene">
-          <div class="back" data-depth="back">
-            <img class="layer-img" src="FIND Real Estate _ Purchase, Rent or Sell Commercial and Residential Real Estate_files/back.webp" alt="">
-          </div>
-          <div class="house" data-depth="house">
-            <img src="ChatGPT_Image_Apr_28__2026__09_09_01_PM-removebg-preview.png" alt="">
-          </div>
-          <div class="clouds">
-            <div class="cloud" data-depth="cloud-left">
-              <img class="layer-img" src="FIND Real Estate _ Purchase, Rent or Sell Commercial and Residential Real Estate_files/cloud.webp" alt="">
-            </div>
-            <div class="cloud" data-depth="cloud-right">
-              <img class="layer-img" src="FIND Real Estate _ Purchase, Rent or Sell Commercial and Residential Real Estate_files/cloud.webp" alt="">
-            </div>
-          </div>
-          <div class="smoke" data-depth="smoke">
-            <img class="layer-img" src="FIND Real Estate _ Purchase, Rent or Sell Commercial and Residential Real Estate_files/smoke.webp" alt="">
-          </div>
-          <div class="bottom-fade"></div>
+  <main id="top">
+    <section class="hero" data-hero>
+      <div class="hero-bg" data-depth="slow">
+        <img src="drive-assets/root-space/optimized/200-dsc00916.webp" alt="">
+      </div>
+      <div class="hero-copy">
+        <div class="eyebrow">Bhopal's biggest coworking space</div>
+        <h1>Work in style. Move in today.</h1>
+        <p class="hero-sub">Private cabins, flexible desks, pantry, lounge, and everyday office infrastructure already handled.</p>
+        <div class="hero-actions">
+          <a class="pill" href="#contact">Book Your Seat →</a>
+          <a class="pill secondary" href="#difference">Explore the space</a>
         </div>
-        <div class="content" data-depth="content">
-          <div class="content-inner">
-            <h1>Bhopal's Biggest Co-working Space</h1>
-            <p class="subcopy">Open to serve you now. <strong>Work in style and finesse.</strong></p>
-            <button class="cta" type="button">Book Your Seat <span aria-hidden="true">→</span></button>
+      </div>
+      <div class="hero-building" data-depth="building">
+        <img src="ChatGPT_Image_Apr_28__2026__09_09_01_PM-removebg-preview.png" alt="">
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Root Space highlights">
+      <div class="ticker-track">
+        <span>Cabins for focused teams</span>
+        <span>Flexible desks for founders</span>
+        <span>Pantry and coffee included</span>
+        <span>Lounge spaces for resets</span>
+        <span>High-speed Wi-Fi</span>
+        <span>Professional address in Bhopal</span>
+        <span>Cabins for focused teams</span>
+        <span>Flexible desks for founders</span>
+        <span>Pantry and coffee included</span>
+        <span>Lounge spaces for resets</span>
+        <span>High-speed Wi-Fi</span>
+        <span>Professional address in Bhopal</span>
+      </div>
+    </section>
+
+    <section class="difference" id="difference" data-difference>
+      <div class="difference-sticky">
+        <h2 class="difference-title">
+          <span class="difference-word">The</span>
+          <span class="difference-word difference-muted">Root Space</span>
+          <span class="difference-word">difference</span>
+        </h2>
+      </div>
+    </section>
+
+    <section class="scrolling-cards" data-card-section>
+      <div class="cards-sticky">
+        <div class="container cards-head">
+          <h2>Everything your office usually makes complicated.</h2>
+          <p>Scroll through the small details that make Root Space feel ready from day one.</p>
+        </div>
+        <div class="card-rail-wrap" aria-label="Root Space benefits">
+          <div class="card-rail" data-card-rail>
+            <article class="scroll-card dark">
+              <small>Move in fast</small>
+              <p>Walk in with a laptop. The desks, Wi-Fi, lighting, pantry, and work zones are already handled.</p>
+            </article>
+            <article class="scroll-card">
+              <small>Private cabins</small>
+              <p>Focused rooms for teams that need privacy without committing to a full office buildout.</p>
+            </article>
+            <article class="scroll-card">
+              <small>Flexible desks</small>
+              <p>Seats for founders, freelancers, consultants, and remote teams that need a reliable base.</p>
+            </article>
+            <article class="scroll-card dark">
+              <small>Lounge rhythm</small>
+              <p>A proper reset zone for informal meetings, breaks, quick calls, and a change of posture.</p>
+            </article>
+            <article class="scroll-card">
+              <small>Pantry included</small>
+              <p>Coffee and everyday convenience sit inside the workday, not somewhere you have to chase.</p>
+            </article>
+            <article class="scroll-card">
+              <small>Scale calmly</small>
+              <p>Add seats when the team grows and stay flexible when plans, projects, or headcount change.</p>
+            </article>
           </div>
         </div>
       </div>
     </section>
-    <section class="why reveal" data-parallax-section>
+
+    <section class="proof">
       <div class="container">
-        <div class="grid-2">
-          <div class="section-label" data-parallax="copy">Why Root Space</div>
-          <p class="large-copy why-copy" data-parallax="copy">A ready office without the office headache. <span class="muted">Walk in with your laptop, choose the way you want to sit, and let the space handle the infrastructure.</span></p>
-        </div>
-        <div class="why-video">
-          <img data-parallax="image" src="drive-assets/root-space/optimized/200-dsc00916.webp" alt="Open desk seating at Root Space">
-        </div>
-      </div>
-    </section>
-
-    <section class="arrows-section reveal" data-parallax-section>
-      <div class="container">
-        <h2 class="arrows-title" data-parallax="copy">Built for teams that need <span>room to move.</span></h2>
-        <div class="metric-row">
-          <div data-parallax="metric"><strong>Cabins</strong><span>Private rooms for focused teams</span></div>
-          <div data-parallax="metric"><strong>Desks</strong><span>Flexible seats for founders and freelancers</span></div>
-          <div data-parallax="metric"><strong>Lounge</strong><span>A reset zone for calls, breaks, and downtime</span></div>
-          <div data-parallax="metric"><strong>Pantry</strong><span>Coffee, food, and everyday convenience</span></div>
-        </div>
-        <p class="center-text" data-parallax="copy">No setup cost, no long fit-out cycle, no furniture hunt. <span class="muted">Join when you need it, scale when the team grows, and leave without the usual hassle.</span></p>
-      </div>
-    </section>
-
-    <section class="rewired reveal" data-parallax-section>
-      <div class="container grid-2">
-        <div data-parallax="copy">
-          <h2 class="steps-title">Facilities,<br><span class="muted">Already In.</span></h2>
-          <a class="cta" href="#contact">Book a Tour <span aria-hidden="true">→</span></a>
-        </div>
-        <div class="steps-list">
-          <div class="step" data-parallax="card">High-speed Wi-Fi. <span class="muted">Stable connectivity for meetings, builds, calls, and daily operations.</span></div>
-          <div class="step" data-parallax="card">Free coffee and pantry access. <span class="muted">The small daily comforts are handled before the workday starts.</span></div>
-          <div class="step" data-parallax="card">Chilling lounge and breakout spaces. <span class="muted">A workplace that makes room for momentum and recovery.</span></div>
+        <div class="metrics">
+          <div class="metric" data-reveal><strong>01</strong><span>Walk in with your laptop and start the same day.</span></div>
+          <div class="metric" data-reveal><strong>04</strong><span>Cabins, desks, lounge, and pantry under one roof.</span></div>
+          <div class="metric" data-reveal><strong>0</strong><span>Fit-out cost, furniture hunt, or utility setup.</span></div>
+          <div class="metric" data-reveal><strong>24/7</strong><span>A work-ready environment for teams that keep moving.</span></div>
         </div>
       </div>
     </section>
 
-    <section class="agents reveal" data-parallax-section>
-      <div class="container grid-2">
-        <div class="section-label" data-parallax="copy">Seating Options</div>
-        <div>
-          <div class="large-copy" data-parallax="copy">From one seat to a private room. <span class="muted">Pick the setup that matches your working rhythm.</span></div>
-          <div class="agent-media">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Dedicated desks at Root Space">
+    <section class="workspace" id="seating">
+      <div class="workspace-copy" data-reveal>
+        <div class="label">Seating options</div>
+        <h2>From one desk to a private room.</h2>
+        <p class="lead">Choose the setup that matches your rhythm: flexible desks for solo work, cabins for privacy, and shared spaces for collaboration.</p>
+        <a class="pill" href="#contact">Check availability →</a>
+      </div>
+      <div class="workspace-photo">
+        <img data-parallax-image src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
+      </div>
+    </section>
+
+    <section class="coverage" id="facilities">
+      <div class="container coverage-grid">
+        <div data-reveal>
+          <div class="label">One space, every workday need</div>
+          <h2>Office infrastructure, <span>already in.</span></h2>
+          <p class="lead">Root Space handles the everyday setup so your team can focus on calls, builds, clients, and deep work.</p>
+          <a class="pill secondary" href="#contact">Book a tour →</a>
+        </div>
+        <div class="coverage-list">
+          <div class="coverage-item" data-reveal><span>High-speed Wi-Fi</span><span>01</span></div>
+          <div class="coverage-item" data-reveal><span>Free coffee and pantry</span><span>02</span></div>
+          <div class="coverage-item" data-reveal><span>Chilling lounge</span><span>03</span></div>
+          <div class="coverage-item" data-reveal><span>Reception-ready address</span><span>04</span></div>
+          <div class="coverage-item" data-reveal><span>Cabins and shared desks</span><span>05</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="steps" data-steps>
+      <div class="steps-sticky">
+        <div class="step-visual">
+          <img class="active" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
+          <img src="drive-assets/root-space/optimized/220-dsc00936.webp" alt="Lounge and pantry at Root Space">
+          <img src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Exterior of Root Space">
+        </div>
+        <div class="step-copy">
+          <div class="step-card active">
+            <small>01</small>
+            <h3>Choose how you work.</h3>
+            <p>Pick a cabin, desk, or shared zone based on team size, privacy, and work style.</p>
           </div>
-          <p class="agent-copy" data-parallax="copy">Choose cabins for privacy, desks for flexibility, and shared zones for collaboration. <span class="muted">Root Space is built for startups, remote teams, consultants, creators, and growing local businesses.</span></p>
-          <a class="cta" href="#contact" data-parallax="copy">Check Availability <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-    <section class="testimonials reveal" data-parallax-section>
-      <div class="container">
-        <h2 class="section-title" data-parallax="copy">Work. Connect. <span class="muted">Belong.</span></h2>
-      </div>
-      <div class="testimonial-track">
-        <div class="quote" data-parallax="card">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
-        <div class="quote" data-parallax="card">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
-        <div class="quote" data-parallax="card">A pantry, lounge, and everyday services that keep work friction low.<strong>Stay comfortable</strong></div>
-        <div class="quote" data-parallax="card">A large Bhopal coworking space designed for focus, calls, and collaboration.<strong>Scale calmly</strong></div>
-        <div class="quote" data-parallax="card">Flexible desks for solo professionals and small teams.<strong>Start light</strong></div>
-        <div class="quote" data-parallax="card">Cabins for teams that need privacy without building an office.<strong>Move in fast</strong></div>
-      </div>
-    </section>
-
-    <section class="services reveal" data-parallax-section>
-      <div class="container">
-        <div class="grid-2">
-          <div class="section-label" data-parallax="copy">Inside The Space</div>
-          <h2 class="section-title" data-parallax="copy">The rooms do the talking.</h2>
-        </div>
-        <div class="service-list">
-          <div class="service" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private cabin at Root Space">
-            <span></span>
-            <p>Cabins with clean partitions, warm lighting, and enough quiet for actual deep work.</p>
-            <div class="service-name">Cabins</div>
+          <div class="step-card">
+            <small>02</small>
+            <h3>Use the space immediately.</h3>
+            <p>Wi-Fi, seating, pantry, lounge, and front desk support are already ready.</p>
           </div>
-          <div class="service" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/220-dsc00936.webp" alt="Lounge and pantry area at Root Space">
-            <span></span>
-            <p>A casual lounge setup for breaks, informal meetings, or a change of posture.</p>
-            <div class="service-name">Lounge</div>
-          </div>
-          <div class="service" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception and pantry area at Root Space">
-            <span></span>
-            <p>A reception and service zone that gives the space a polished first impression.</p>
-            <div class="service-name">Pantry</div>
+          <div class="step-card">
+            <small>03</small>
+            <h3>Scale without friction.</h3>
+            <p>Add seats as the team grows, pause when plans change, and avoid long fit-out cycles.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="support reveal" data-parallax-section>
-      <div class="container">
-        <div class="grid-2">
-          <h2 class="section-title" data-parallax="copy">Why choose a coworking space?</h2>
-          <p class="center-text" data-parallax="copy">Because the best office is the one you do not have to build, maintain, or overcommit to.</p>
+    <section class="faq">
+      <div class="container faq-grid">
+        <div data-reveal>
+          <div class="label">Questions</div>
+          <h2>Before you visit.</h2>
         </div>
-        <div class="support-items">
-          <div class="support-item" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Exterior of Root Space">
-            <h3>No infra cost</h3>
-            <p>Skip fit-outs, furniture, maintenance, internet setup, and utilities.</p>
-          </div>
-          <div class="support-item" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/40-dsc00756.webp" alt="Work desks with planters">
-            <h3>Join and quit anytime</h3>
-            <p>Stay flexible as your team size, projects, and city plans change.</p>
-          </div>
-          <div class="support-item" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Small private room at Root Space">
-            <h3>Professional address</h3>
-            <p>Meet clients in a polished workspace instead of improvising every meeting.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="posts reveal" data-parallax-section>
-      <div class="container">
-        <div class="grid-2">
-          <h2 class="section-title" data-parallax="copy">A closer look.</h2>
-          <p class="center-text" data-parallax="copy">Real photos from the centre: warm rooms, functional seating, and a space that feels ready from day one.</p>
-        </div>
-        <div class="post-list">
-          <article class="post" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/520-dsc01236.webp" alt="Window seating at Root Space">
-            <div><time>Gallery</time><h3>Natural light and indoor plants</h3><p>Work areas are softened with planters, warm surfaces, and clean lines.</p></div>
-          </article>
-          <article class="post" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/140-dsc00856.webp" alt="Reception desk at Root Space">
-            <div><time>Front Desk</time><h3>A proper arrival experience</h3><p>The reception area sets the tone for visitors, interviews, and client meetings.</p></div>
-          </article>
-          <article class="post" data-parallax="card">
-            <img data-parallax="image" src="drive-assets/root-space/optimized/20-dsc00735.webp" alt="Private room at Root Space">
-            <div><time>Rooms</time><h3>Private zones when you need them</h3><p>Cabins and meeting spaces give small teams the privacy of an office without the lock-in.</p></div>
-          </article>
+        <div data-reveal>
+          <details open>
+            <summary>Can I start with just one seat?</summary>
+            <p>Yes. Root Space works for solo professionals, founders, freelancers, and teams that need more than one desk.</p>
+          </details>
+          <details>
+            <summary>Are cabins available for private teams?</summary>
+            <p>Yes. Cabins are designed for teams that need quiet, privacy, and a professional office feel without building an office.</p>
+          </details>
+          <details>
+            <summary>What facilities are included?</summary>
+            <p>High-speed Wi-Fi, pantry access, coffee, lounge areas, seating, and a polished arrival experience are part of the space.</p>
+          </details>
+          <details>
+            <summary>Can I visit before booking?</summary>
+            <p>Yes. Book a tour to see the cabins, desks, lounge, pantry, and the overall working environment before choosing.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <section class="final-cta reveal" id="contact" data-parallax-section>
-      <img data-parallax="image" src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Root Space exterior in Bhopal">
-      <div class="final-cta-content" data-parallax="copy">
-        <h2 class="section-title">Visit Root Space. <span class="muted">See the setup before you choose.</span></h2>
-        <div class="cta-row">
-          <a class="cta" href="https://wa.me/" target="_blank" rel="noreferrer">WhatsApp Enquiry <span aria-hidden="true">→</span></a>
-          <a class="cta secondary-cta" href="tel:">Call Now <span aria-hidden="true">→</span></a>
-          <a class="cta secondary-cta" href="https://www.google.com/maps/search/?api=1&query=Root%20Space%20Bhopal" target="_blank" rel="noreferrer">Get Location <span aria-hidden="true">→</span></a>
+    <section class="final" id="contact">
+      <img data-final-image src="drive-assets/root-space/optimized/500-dsc01216.webp" alt="Root Space exterior in Bhopal">
+      <div class="final-content" data-reveal>
+        <h2>Visit Root Space. <span>Feel the setup before you choose.</span></h2>
+        <p class="lead">See the rooms, test the work vibe, and choose the seat or cabin that fits your next stage.</p>
+        <div class="hero-actions">
+          <a class="pill secondary" href="https://wa.me/" target="_blank" rel="noreferrer">WhatsApp enquiry →</a>
+          <a class="pill" href="https://www.google.com/maps/search/?api=1&query=Root%20Space%20Bhopal" target="_blank" rel="noreferrer">Get location →</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-title">Root Space<br>Work · Connect · Belong</div>
-        <nav class="footer-links" aria-label="Footer">
-          <a href="#">Home</a>
-          <a href="#">Facilities</a>
-          <a href="#">Seating</a>
-          <a href="#">Gallery</a>
-          <a href="#">Contact</a>
-        </nav>
-        <nav class="footer-links" aria-label="Social">
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-          <a href="#">WhatsApp</a>
-          <a href="#">Maps</a>
-        </nav>
-      </div>
-      <div class="copyright">
-        <span>Bhopal, Madhya Pradesh · Flexible desks, cabins, pantry and lounge</span>
-        <span>Root Space · Copyright © 2026</span>
-      </div>
+    <div class="container footer-row">
+      <span>Root Space · Bhopal, Madhya Pradesh</span>
+      <span>Flexible desks, cabins, pantry and lounge</span>
     </div>
   </footer>
 
   <script>
-    document.documentElement.classList.add("parallax-ready");
-
-    const hero = document.querySelector("#hero");
-    const layers = {
-      back: document.querySelector("[data-depth='back']"),
-      house: document.querySelector("[data-depth='house']"),
-      cloudLeft: document.querySelector("[data-depth='cloud-left']"),
-      cloudRight: document.querySelector("[data-depth='cloud-right']"),
-      smoke: document.querySelector("[data-depth='smoke']"),
-      content: document.querySelector("[data-depth='content']")
-    };
-
-    function clamp(value, min = 0, max = 1) {
-      return Math.max(min, Math.min(max, value));
-    }
-
-    function smoothstep(value) {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const clamp = (value, min = 0, max = 1) => Math.max(min, Math.min(max, value));
+    const smoothstep = (value) => {
       const t = clamp(value);
       return t * t * (3 - 2 * t);
-    }
+    };
 
-    let targetProgress = 0;
-    let renderProgress = 0;
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    function readProgress() {
-      const rect = hero.getBoundingClientRect();
-      const scrollable = Math.max(1, hero.offsetHeight - window.innerHeight);
-      return clamp(-rect.top / scrollable);
-    }
-
-    function renderHero(progress) {
-      const intro = clamp(progress / 0.82);
-      const buildingFade = 1 - smoothstep((progress - 0.78) / 0.16);
-
-      layers.back.style.transform = `scale(${1 + progress * 0.05})`;
-      layers.house.style.transform = `translateY(${-82 * intro}%) scale(${1 + intro * 0.62})`;
-      layers.house.style.opacity = `${buildingFade}`;
-      layers.smoke.style.transform = `translateY(${70 - intro * 70}%)`;
-      layers.cloudLeft.style.transform = `translateX(${-15 * intro}%)`;
-      layers.cloudRight.style.transform = `translateX(${15 * intro}%)`;
-      layers.content.style.transform = `translateY(${20 * intro}%) scale(${1 - intro * 0.1})`;
-      layers.content.style.opacity = `${1 - clamp(intro * 1.3)}`;
-    }
-
-    function updateHeroTarget() {
-      targetProgress = readProgress();
-    }
-
-    function animateHero() {
-      targetProgress = readProgress();
-      renderProgress += (targetProgress - renderProgress) * 0.16;
-      if (Math.abs(targetProgress - renderProgress) < 0.0005) renderProgress = targetProgress;
-      renderHero(renderProgress);
-      requestAnimationFrame(animateHero);
-    }
-
-    targetProgress = readProgress();
-    renderProgress = targetProgress;
-    renderHero(renderProgress);
-    window.addEventListener("scroll", updateHeroTarget, { passive: true });
-    window.addEventListener("resize", updateHeroTarget);
-    if (!prefersReducedMotion) requestAnimationFrame(animateHero);
-
-    const observer = new IntersectionObserver((entries) => {
+    const reveals = document.querySelectorAll("[data-reveal]");
+    const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) entry.target.classList.add("in-view");
+        if (entry.isIntersecting) entry.target.classList.add("visible");
       });
-    }, { threshold: 0.18 });
+    }, { threshold: .16 });
+    reveals.forEach((item) => revealObserver.observe(item));
 
-    document.querySelectorAll(".reveal").forEach((section) => observer.observe(section));
+    const heroSlow = document.querySelector("[data-depth='slow']");
+    const heroBuilding = document.querySelector("[data-depth='building']");
+    const difference = document.querySelector("[data-difference]");
+    const differenceWords = document.querySelectorAll(".difference-word");
+    const cardSection = document.querySelector("[data-card-section]");
+    const cardRail = document.querySelector("[data-card-rail]");
+    const steps = document.querySelector("[data-steps]");
+    const stepCards = document.querySelectorAll(".step-card");
+    const stepImages = document.querySelectorAll(".step-visual img");
+    const parallaxImages = document.querySelectorAll("[data-parallax-image], [data-final-image]");
 
-    const parallaxItems = Array.from(document.querySelectorAll("[data-parallax]")).map((element, index) => ({
-      element,
-      index,
-      rendered: 0
-    }));
-
-    function elementProgress(element) {
+    function progressFor(element) {
       const rect = element.getBoundingClientRect();
       const viewport = window.innerHeight || 1;
       return clamp((viewport - rect.top) / (viewport + rect.height));
     }
 
-    function revealProgress(progress, offset = 0) {
-      return smoothstep((progress - offset) / 0.42);
-    }
+    function renderMotion() {
+      const heroProgress = clamp(window.scrollY / Math.max(1, window.innerHeight));
+      if (heroSlow) heroSlow.style.transform = `translate3d(0, ${heroProgress * 44}px, 0) scale(1.04)`;
+      if (heroBuilding) heroBuilding.style.transform = `translate3d(-50%, ${heroProgress * -36}px, 0) scale(${1 + heroProgress * .035})`;
 
-    function renderParallaxItem(item) {
-      const { element, index } = item;
-      const type = element.dataset.parallax;
-      const progress = item.rendered;
-      const centered = progress * 2 - 1;
-      const stagger = type === "card" ? (index % 4) * 0.035 : 0;
-      const reveal = revealProgress(progress, stagger);
-
-      if (type === "image") {
-        const drift = centered * -34;
-        element.style.transform = `translate3d(0, ${drift}px, 0) scale(1.06)`;
-        element.style.opacity = "1";
-        return;
+      if (difference) {
+        const diffProgress = progressFor(difference);
+        differenceWords.forEach((word, index) => {
+          const local = smoothstep((diffProgress - index * .14) / .28);
+          word.style.opacity = `${.18 + local * .82}`;
+          word.style.transform = `translate3d(0, ${(1 - local) * 42}px, 0)`;
+        });
       }
 
-      if (type === "metric") {
-        const metricReveal = smoothstep((progress + 0.14) / 0.2);
-        const lift = (1 - metricReveal) * 8;
-        element.style.transform = `translate3d(0, ${lift}px, 0)`;
-        element.style.opacity = `${0.82 + metricReveal * 0.18}`;
-        return;
+      if (cardSection && cardRail) {
+        const cardProgress = smoothstep((progressFor(cardSection) - .1) / .74);
+        const maxShift = Math.max(0, cardRail.scrollWidth - window.innerWidth + 48);
+        cardRail.style.transform = `translate3d(${-maxShift * cardProgress}px, 0, 0)`;
       }
 
-      const lift = (1 - reveal) * 30;
-      const drift = centered * -8;
-      element.style.transform = `translate3d(0, ${lift + drift}px, 0)`;
-      element.style.opacity = `${0.18 + reveal * 0.82}`;
+      if (steps) {
+        const stepProgress = progressFor(steps);
+        const active = Math.min(stepCards.length - 1, Math.floor(clamp(stepProgress) * stepCards.length));
+        stepCards.forEach((card, index) => card.classList.toggle("active", index === active));
+        stepImages.forEach((image, index) => image.classList.toggle("active", index === active));
+      }
+
+      parallaxImages.forEach((image) => {
+        const p = progressFor(image);
+        image.style.transform = `translate3d(0, ${(p - .5) * -42}px, 0) scale(1.08)`;
+      });
+
+      requestAnimationFrame(renderMotion);
     }
 
-    function animatePageParallax() {
-      parallaxItems.forEach((item) => {
-        const next = elementProgress(item.element);
-        const speed = item.element.dataset.parallax === "metric" ? 0.36 : 0.14;
-        item.rendered += (next - item.rendered) * speed;
-        if (Math.abs(next - item.rendered) < 0.0005) item.rendered = next;
-        renderParallaxItem(item);
-      });
-      requestAnimationFrame(animatePageParallax);
-    }
-
-    if (prefersReducedMotion) {
-      document.querySelectorAll(".reveal").forEach((section) => section.classList.add("in-view"));
-      parallaxItems.forEach(({ element }) => {
-        element.style.opacity = "1";
-        element.style.transform = "none";
-      });
+    if (reduceMotion) {
+      reveals.forEach((item) => item.classList.add("visible"));
     } else {
-      parallaxItems.forEach((item) => {
-        item.rendered = elementProgress(item.element);
-        renderParallaxItem(item);
-      });
-      requestAnimationFrame(animatePageParallax);
+      requestAnimationFrame(renderMotion);
     }
   </script>
 </body>
