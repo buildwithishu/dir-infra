@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/",
-      "destination": "/FIND%20Real%20Estate%20_%20Purchase,%20Rent%20or%20Sell%20Commercial%20and%20Residential%20Real%20Estate.html"
+      "destination": "/index.html"
     }
   ]
 }
